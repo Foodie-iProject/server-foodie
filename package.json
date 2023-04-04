@@ -1,0 +1,31 @@
+{
+  "name": "server-foodie",
+  "version": "1.0.0",
+  "description": "server-foodie Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Foodie-iProject/server-foodie.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Foodie-iProject/server-foodie/issues"
+  },
+  "homepage": "https://github.com/Foodie-iProject/server-foodie#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0",
+    "sequelize": "^6.30.0",
+    "sequelize-cli": "^6.6.0"
+  }
+}
