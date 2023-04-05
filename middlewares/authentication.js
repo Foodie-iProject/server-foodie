@@ -15,7 +15,7 @@ const authCust = async (req, res, next) => {
       throw { name: "invalid_token" };
     }
     req.customer = payload;
-    console.log(req.customer)
+    // console.log(req.customer)
     next();
   } catch (error) {
     next(error);

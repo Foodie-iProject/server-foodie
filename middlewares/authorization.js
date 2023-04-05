@@ -21,7 +21,7 @@ const authDriverToChangeStatus = async (req, res, next) => {
         ],
       },
     });
-    console.log(selectedOrder, "<<<<<<<<<<<<<<<<<<<<");
+    // console.log(selectedOrder, "<<<<<<<<<<<<<<<<<<<<");
     if (!selectedOrder) {
       throw { name: "forbidden" };
     }
@@ -45,7 +45,7 @@ const authCustomerToComplete = async (req, res, next) => {
         [Op.and]: [{ id }, { CustomerId }],
       },
     });
-    console.log(selectedOrder);
+    // console.log(selectedOrder);
     if (!selectedOrder) {
       throw { name: "forbidden" };
     }

@@ -8,6 +8,7 @@ const {
   OrderDetailFoods,
   Sequelize,
 } = require("../models");
+const midtransClient = require("midtrans-client");
 const { encodeToken, comparePass } = require("../helpers/helper");
 const { Op } = require("sequelize");
 
@@ -54,17 +55,53 @@ class CustomerController {
     }
   }
 
+  static async midtransToken(req, res, next) {
+    try {
+      const {totalPrice} = req.body;
+      const codeOrder =
+        `Foodie-${req.customer.id}-Transsaction` +
+        Math.ceil(Math.random() * 10000) +
+        req.customer.iat;
+      const selectedCustomer = await Customer.findByPk(req.customer.id);
+
+      let snap = new midtransClient.Snap({
+        // Set to true if you want Production Environment (accept real transaction).
+        isProduction: false,
+        serverKey: process.env.MIDTRANS_SERVER_API_KEY,
+      });
+
+      let parameter = {
+        transaction_details: {
+          order_id: codeOrder,
+          gross_amount: totalPrice,
+        },
+        credit_card: {
+          secure: true,
+        },
+        customer_details: {
+          username: selectedCustomer.name,
+          email: selectedCustomer.email,
+          address: selectedCustomer.address,
+        },
+      };
+
+      const midtransToken = await snap.createTransaction(parameter);
+      res.status(201).json({ midtrans_token: midtransToken });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async createOrder(req, res, next) {
     try {
       const status = "find_a_driver";
       const CustomerId = req.customer.id;
-      // const CustomerId = 1;
-      // const DriverId = 0;
       const { totalPrice, qty, FoodId } = req.body;
       const newOrder = await Order.create({
         // DriverId,
         CustomerId,
       });
+      // console.log(req.customer);
 
       const newOrderDetail = await OrderDetail.create({
         qty,
@@ -126,7 +163,13 @@ class CustomerController {
   static async getCustomerOrderById(req, res, next) {
     try {
       const { OrderId } = req.params;
-      const order = await Order.findByPk(OrderId, {
+      const CustomerId = req.customer.id;
+      // console.log(OrderId, "<<<<<<<<");
+      // console.log(req.customer.id);
+      const order = await Order.findOne({
+        where: {
+          [Op.and]: [{ CustomerId }, { id: OrderId }],
+        },
         include: [
           {
             model: OrderDetail,
@@ -167,6 +210,13 @@ class CustomerController {
   static async completedOrder(req, res, next) {
     try {
       const { OrderId } = req.params;
+      const checkOrder = await OrderDetail.findByPk(OrderId);
+      if (checkOrder.status === "find_a_driver") {
+        throw { name: "bad_request", message: "Still find a driver" };
+      }
+      if (checkOrder.status === "Delivered") {
+        throw { name: "bad_request", message: "Already delivered" };
+      }
       const updatedOrder = await OrderDetail.update(
         { status: "Delivered" },
         {
@@ -176,10 +226,7 @@ class CustomerController {
           returning: true,
         }
       );
-      if (!updatedOrder[0]) {
-        throw { name: "bad_request", message:"Still find a driver" };
-      }
-      console.log(updatedOrder)
+
       res.status(200).json(updatedOrder[1]);
     } catch (error) {
       next(error);

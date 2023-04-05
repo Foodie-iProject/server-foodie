@@ -1,17 +1,21 @@
 const { Food } = require("../models");
+const axios = require("axios");
+
 class FoodController {
   static async getAllFood(req, res, next) {
     try {
+      const foodMealDb = await axios({
+        method: "GET",
+        url: "https://themealdb.p.rapidapi.com/filter.php",
+        params: { c: "Seafood" },
+        headers: {
+          "X-RapidAPI-Key": process.env.THE_MEAL_API_KEY,
+          "X-RapidAPI-Host": "themealdb.p.rapidapi.com",
+        },
+      });
       const foods = await Food.findAll();
-      res.status(200).json(foods);
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async getAllFood(req, res, next) {
-    try {
-      const selectedFood = await Food.findByPk({ where: { id } });
-      res.status(200).json(selectedFood);
+      console.log(foodMealDb)
+      res.status(200).json(foodMealDb);
     } catch (error) {
       next(error);
     }
