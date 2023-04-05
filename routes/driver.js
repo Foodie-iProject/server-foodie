@@ -1,9 +1,21 @@
 const express = require("express");
+const Controller = require("../controllers/driverController");
+const { authDriver } = require("../middlewares/authentication");
+const { authDriverToChangeStatus } = require("../middlewares/authorization");
 const router = express.Router();
-const DriverController = require("../controllers/driver");
 
-
-router.post("/register", DriverController.register);
-router.post("/login", DriverController.login);
+router.post("/register", Controller.register);
+router.post("/login", Controller.login);
+router.use(authDriver);
+router.get("/orders", Controller.getAllAvailableOrder);
+router.get(
+    "/orders/:OrderId",
+    Controller.readOrderById
+  );
+router.patch(
+  "/orders/:OrderId",
+  authDriverToChangeStatus,
+  Controller.takeOrder
+);
 
 module.exports = router;

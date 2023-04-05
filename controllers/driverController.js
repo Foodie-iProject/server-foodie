@@ -11,11 +11,11 @@ const {
 const { encodeToken, comparePass } = require("../helpers/helper");
 const { Op } = require("sequelize");
 
-class CustomerController {
+class DriverController {
   static async register(req, res, next) {
     try {
-      const { name, email, password, address, rekening } = req.body;
-      const newUser = await Customer.create({
+      const { name, email, password, rekening, address } = req.body;
+      const newUser = await Driver.create({
         name,
         email,
         password,
@@ -27,68 +27,46 @@ class CustomerController {
       next(err);
     }
   }
+
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
+      console.log(email, password, "<<<<<<<");
       if (!email || email === undefined)
         throw { name: "bad_request", message: "empty email" };
       if (!password || email === undefined)
         throw { name: "bad_request", message: "empty password" };
 
-      const selectedUser = await Customer.findOne({ where: { email } });
-      // console.log(selectedUser);
-      if (!selectedUser) {
+      const selectedDriver = await Driver.findOne({ where: { email } });
+      console.log(selectedDriver);
+      if (!selectedDriver) {
         throw { name: "unauthorized", message: "Invalid email or password" };
       }
-      if (!comparePass(password, selectedUser.password)) {
+      if (!comparePass(password, selectedDriver.password)) {
         throw { name: "unauthorized", message: "Invalid email or password " };
       }
-      const token = encodeToken({ id: selectedUser.id });
+      const token = encodeToken({ id: selectedDriver.id });
       res.status(200).json({
         access_token: token,
-        name: selectedUser.name,
-        email: selectedUser.email,
+        name: selectedDriver.name,
+        email: selectedDriver.email,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  static async createOrder(req, res, next) {
+  static async getAllAvailableOrder(req, res, next) {
     try {
-      const status = "find_a_driver";
-      const CustomerId = req.customer.id;
-      // const CustomerId = 1;
-      // const DriverId = 0;
-      const { totalPrice, qty, FoodId } = req.body;
-      const newOrder = await Order.create({
-        // DriverId,
-        CustomerId,
-      });
-
-      const newOrderDetail = await OrderDetail.create({
-        qty,
-        status,
-        totalPrice,
-        FoodId,
-        OrderId: newOrder.id,
-      });
-      res.status(200).json(newOrderDetail);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  static async getAllCustomerOrder(req, res, next) {
-    try {
-      const orders = await Order.findAll({
-        where: {
-          CustomerId: req.customer.id,
-        },
+      const order = await Order.findAll({
         order: ["createdAt"],
+        required: true,
         include: [
           {
             model: OrderDetail,
+            where: {
+              status: "find_a_driver",
+            },
             attributes: { exclude: ["createdAt", "updatedAt"] },
             include: [
               {
@@ -114,16 +92,16 @@ class CustomerController {
           },
         ],
       });
-      if (!orders) {
+      if (!order || order.length === 0) {
         throw { name: "Not_Found" };
       }
-      res.status(200).json({ total: orders.length, data: orders });
+      res.status(200).json(order);
     } catch (error) {
       next(error);
     }
   }
 
-  static async getCustomerOrderById(req, res, next) {
+  static async readOrderById(req, res, next) {
     try {
       const { OrderId } = req.params;
       const order = await Order.findByPk(OrderId, {
@@ -155,36 +133,50 @@ class CustomerController {
           },
         ],
       });
-      if (!order) {
-        throw { name: "Not_Found" };
-      }
       res.status(200).json(order);
     } catch (error) {
       next(error);
     }
   }
 
-  static async completedOrder(req, res, next) {
+  static async takeOrder(req, res, next) {
     try {
       const { OrderId } = req.params;
-      const updatedOrder = await OrderDetail.update(
-        { status: "Delivered" },
-        {
-          where: {
-            [Op.and]: [{ OrderId }, { status: "onProgress" }],
-          },
-          returning: true,
-        }
+      const DriverId = req.driver.id;
+
+      const updatedOrder = await Order.update(
+        { DriverId },
+        { where: { id: OrderId }, returning: true }
       );
-      if (!updatedOrder[0]) {
-        throw { name: "bad_request", message:"Still find a driver" };
+      const updatedOrderDetails = await OrderDetail.update(
+        { status: "onProgress" },
+        { where: { OrderId }, returning: true }
+      );
+      if (!updatedOrderDetails[0]) {
+        throw { name: "Not_Found" };
       }
-      console.log(updatedOrder)
-      res.status(200).json(updatedOrder[1]);
+      const selectedOrder = await Order.findByPk(OrderId, {
+        include: [
+          {
+            model: Customer,
+            attributes: ["name", "address"],
+          },
+          {
+            model: Driver,
+            attributes: ["id", "name"],
+          },
+        ],
+      });
+      res
+        .status(200)
+        .json({
+          UpdatedOrder: selectedOrder,
+          OrderDetail: updatedOrderDetails[1],
+        });
     } catch (error) {
       next(error);
     }
   }
 }
 
-module.exports = CustomerController;
+module.exports = DriverController;

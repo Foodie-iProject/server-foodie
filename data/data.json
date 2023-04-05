@@ -1,0 +1,23 @@
+{
+    "customers":[{
+        "name":"asbon",
+        "email":"asbon@mail.com",
+        "password":"12345678",
+        "address":"jl. siliwangi",
+        "rekening":"087569741525"
+    }],
+    "drivers":[{
+        "name":"asbon",
+        "email":"asbon@mail.com",
+        "password":"12345678",
+        "address":"jl. siliwangi",
+        "rekening":"2222"
+    }],
+    "restaurants":[{
+        "name":"Resto ayam goreng",
+        "email":"resto@mail.com",
+        "password":"12345678",
+        "address":"jl. kebayoran",
+        "rekening":"3333"
+    }]
+}

@@ -4,7 +4,7 @@ const {encodeToken, comparePass} = require('../helpers/helper')
 class RestaurantController {
   static async register(req, res, next) {
     try {
-      const { name, email, password, rekening } = req.body;
+      const { name, email, password, rekening, address } = req.body;
       const newUser = await Restaurant.create({
         name,
         email,
