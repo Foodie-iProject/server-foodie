@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const {hashPass} =  require('../helpers/helper')
 module.exports = (sequelize, DataTypes) => {
   class Restaurant extends Model {
     /**
@@ -10,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Restaurant.hasMany(models.Food);
-      Restaurant.hasMany(models.OrderDetail);
     }
   }
   Restaurant.init(
