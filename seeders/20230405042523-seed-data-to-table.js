@@ -1,5 +1,7 @@
 'use strict';
 
+const { hashPass } = require('../helpers/helper');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -16,6 +18,8 @@ module.exports = {
     await queryInterface.bulkInsert(
       "Customers",
       dataCust.map((el) => {
+        const hashedPassword = hashPass(el.password)
+        el.password = hashedPassword
         el.createdAt = el.updatedAt = new Date();
         return el;
       }),
@@ -24,6 +28,8 @@ module.exports = {
     await queryInterface.bulkInsert(
       "Drivers",
       dataDriver.map((el) => {
+        const hashedPassword = hashPass(el.password)
+        el.password = hashedPassword
         el.createdAt = el.updatedAt = new Date();
         return el;
       }),
@@ -32,6 +38,8 @@ module.exports = {
     await queryInterface.bulkInsert(
       "Restaurants",
       dataResto.map((el) => {
+        const hashedPassword = hashPass(el.password)
+        el.password = hashedPassword
         el.createdAt = el.updatedAt = new Date();
         return el;
       }),
@@ -39,12 +47,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
     await queryInterface.bulkDelete("Restaurants", null, {});
     await queryInterface.bulkDelete("Drivers", null, {});
     await queryInterface.bulkDelete("Customers", null, {});

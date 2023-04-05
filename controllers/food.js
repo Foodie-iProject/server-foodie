@@ -4,18 +4,24 @@ const axios = require("axios");
 class FoodController {
   static async getAllFood(req, res, next) {
     try {
-      const foodMealDb = await axios({
+      const foodList = await axios({
         method: "GET",
-        url: "https://themealdb.p.rapidapi.com/filter.php",
-        params: { c: "Seafood" },
+        url: "https://api.spoonacular.com/food/menuItems/search",
+        params: {
+          apiKey: process.env.SPOONACULAR_API_KEY,
+          query: "fried",
+          number: 10,
+        },
         headers: {
-          "X-RapidAPI-Key": process.env.THE_MEAL_API_KEY,
-          "X-RapidAPI-Host": "themealdb.p.rapidapi.com",
+          "Content-Type": "application/json",
         },
       });
-      const foods = await Food.findAll();
-      console.log(foodMealDb)
-      res.status(200).json(foodMealDb);
+
+      const menusComplete = foodList.data.menuItems.map((el) => {
+        return el;
+      });
+      // console.log(foodList.data, "<<<<<<<<<");
+      res.status(200).json(menusComplete);
     } catch (error) {
       next(error);
     }

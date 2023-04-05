@@ -1,5 +1,5 @@
-const { Restaurant} = require("../models");
-const {encodeToken, comparePass} = require('../helpers/helper')
+const { Restaurant, Food } = require("../models");
+const { encodeToken, comparePass } = require("../helpers/helper");
 
 class RestaurantController {
   static async register(req, res, next) {
@@ -10,7 +10,7 @@ class RestaurantController {
         email,
         password,
         address,
-        rekening
+        rekening,
       });
       res.status(201).json({ message: "Successfully registered" });
     } catch (err) {
@@ -39,8 +39,42 @@ class RestaurantController {
         access_token: token,
         name: selectedRestaurant.name,
         email: selectedRestaurant.email,
-        address: selectedRestaurant.address
+        address: selectedRestaurant.address,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getAllRestaurant(req, res, next) {
+    try {
+      const allRestaurant = await Restaurant.findAll({
+        attributes: {
+          exclude: ["password", "createdAt", "updatedAt"],
+        },
+      });
+      res.status(200).json(allRestaurant);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getAllFoodPerRestaurant(req, res, next) {
+    try {
+      const RestaurantId = req.params.id;
+      const foodPerRestaurant = await Restaurant.findOne({
+        where: {
+          id: RestaurantId,
+        },
+        include: [
+          {
+            model: Food,
+            attributes: ["id", "name", "price", "imgUrl"],
+          },
+        ],
+        attributes: ["id", "name", "address", "email"],
+      });
+      res.status(200).json(foodPerRestaurant);
     } catch (error) {
       next(error);
     }

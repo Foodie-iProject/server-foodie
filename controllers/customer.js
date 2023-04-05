@@ -57,7 +57,7 @@ class CustomerController {
 
   static async midtransToken(req, res, next) {
     try {
-      const {totalPrice} = req.body;
+      const { totalPrice } = req.body;
       const codeOrder =
         `Foodie-${req.customer.id}-Transsaction` +
         Math.ceil(Math.random() * 10000) +
