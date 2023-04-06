@@ -13,31 +13,19 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      price: {
+      totalPrice: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      FoodId: {
+      status: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Food",
-          key: "id",
-        },
+        type: Sequelize.STRING
       },
       OrderId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Orders",
-          key: "id",
-        },
-      },
-      RestaurantId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Restaurants",
           key: "id",
         },
       },

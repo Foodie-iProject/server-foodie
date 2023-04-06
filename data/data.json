@@ -1,0 +1,531 @@
+{
+  "customers": [
+    {
+      "name": "asbon",
+      "email": "asbon@mail.com",
+      "password": "12345678",
+      "address": "jl. siliwangi",
+      "rekening": "2135-774-1125"
+    },
+    {
+      "name": "gestroi",
+      "email": "gestroi@mail.com",
+      "password": "12345678",
+      "address": "jl. Sigura-gura",
+      "rekening": "0875-6974-1525"
+    }
+  ],
+  "drivers": [
+    {
+      "name": "peris",
+      "email": "peris@mail.com",
+      "password": "12345678",
+      "address": "jl.Kebayoran",
+      "rekening": "2222-0808-0808"
+    },
+    {
+      "name": "tito",
+      "email": "tito@mail.com",
+      "password": "12345678",
+      "address": "jl.Kencana, no. 43",
+      "rekening": "2123-0808-0808"
+    }
+  ],
+  "restaurants": [
+    {
+      "name": "RM Panda",
+      "email": "ayam@mail.com",
+      "password": "12345678",
+      "address": "jl.Melati No.23",
+      "rekening": "328-9840-6932"
+    },
+    {
+      "name": "Cozy and Chill",
+      "email": "cozy@mail.com",
+      "password": "12345678",
+      "address": "jl. Indah cempaka No.23",
+      "rekening": "3281-9820-6922"
+    },
+    {
+      "name": "Resto Fast Eat",
+      "email": "fasteat@mail.com",
+      "password": "12345678",
+      "address": "jl. Mawar, No.17",
+      "rekening": "123-1231-9733"
+    },
+    {
+      "name": "Resto Holy Holy",
+      "email": "holy@mail.com",
+      "password": "12345678",
+      "address": "jl. Pahlawan, No.17",
+      "rekening": "1543-8463-1236"
+    },
+    {
+      "name": "Easy Eat Express",
+      "email": "easy@mail.com",
+      "password": "12345678",
+      "address": "jl. Marmut, No.14",
+      "rekening": "7543-8323-1123"
+    },
+    {
+      "name": "Fat chain",
+      "email": "fat@mail.com",
+      "password": "12345678",
+      "address": "jl. kubis, No.14",
+      "rekening": "7823-8356-1323"
+    },
+    {
+      "name": "Steam and Roll's",
+      "email": "steam@mail.com",
+      "password": "12345678",
+      "address": "jl. landak, No.14",
+      "rekening": "1235-8366-1393"
+    }
+  ],
+  "Food": [
+    {
+      "id": 424566,
+      "title": "Chicken Jr",
+      "image": "https://images.spoonacular.com/file/wximages/424566-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Burger King",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 289455,
+      "title": "Chicken Club",
+      "image": "https://images.spoonacular.com/file/wximages/289455-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Bad Ass Jack's",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 345310,
+      "title": "Double Shrimp Pasta",
+      "image": "https://images.spoonacular.com/file/wximages/345310-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Marie Callender's",
+      "servings": {
+        "number": 1,
+        "size": 796.24,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 323968,
+      "title": "No Rules Parmesan Pasta - w/ Grilled Chicken And Grilled Shrimp",
+      "image": "https://images.spoonacular.com/file/wximages/323968-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Outback",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "Total Meal"
+      }
+    },
+    {
+      "id": 331888,
+      "title": "Ravioli Di Portobello",
+      "image": "https://images.spoonacular.com/file/wximages/331888-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Olive Garden",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 362169,
+      "title": "Toasted Ravioli",
+      "image": "https://images.spoonacular.com/file/wximages/362169-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Zio's Italian Kitchen",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "plating"
+      }
+    },
+    {
+      "id": 331822,
+      "title": "Soups, Chicken & Gnocchi (One Serving)",
+      "image": "https://images.spoonacular.com/file/wximages/331822-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Olive Garden",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 377625,
+      "title": "Baked Seven-Cheese Ravioli - Full Order - w/ Beefy Bolognese",
+      "image": "https://images.spoonacular.com/file/wximages/377625-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Boston Pizza",
+      "servings": {
+        "number": 1,
+        "size": 582,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 355061,
+      "title": "Chicken Gyoza",
+      "image": "https://images.spoonacular.com/file/wximages/355061-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Original Joe's",
+      "servings": {
+        "number": 1,
+        "size": 167,
+        "unit": "grams"
+      }
+    },
+    {
+      "id": 331869,
+      "title": "Chicken Scampi",
+      "image": "https://images.spoonacular.com/file/wximages/331869-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Olive Garden",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 332703,
+      "title": "Chicken Caesar",
+      "image": "https://images.spoonacular.com/file/wximages/332703-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Specialty's Cafe & Bakery",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 308472,
+      "title": "Chicken Caesar",
+      "image": "https://images.spoonacular.com/file/wximages/308472-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Vocelli Pizza",
+      "servings": {
+        "number": 1,
+        "size": 257,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 320096,
+      "title": "Chicken Limone",
+      "image": "https://images.spoonacular.com/file/wximages/320096-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Buca Di Beppo",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 233110,
+      "title": "Chick-fil-A Chicken Platter",
+      "image": "https://images.spoonacular.com/file/wximages/233110-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Chick Fil A",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "platter"
+      }
+    },
+    {
+      "id": 423149,
+      "title": "Chicken Selects",
+      "image": "https://images.spoonacular.com/file/wximages/423149-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "McDonald's",
+      "servings": {
+        "number": 1,
+        "size": 3,
+        "unit": "Piece"
+      }
+    },
+    {
+      "id": 313974,
+      "title": "Chicken Softaco",
+      "image": "https://images.spoonacular.com/file/wximages/313974-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Taco Villa",
+      "servings": {
+        "number": 1,
+        "size": 4.4,
+        "unit": "oz"
+      }
+    },
+    {
+      "id": 423150,
+      "title": "Chicken Selects",
+      "image": "https://images.spoonacular.com/file/wximages/423150-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "McDonald's",
+      "servings": {
+        "number": 1,
+        "size": 5,
+        "unit": "Piece"
+      }
+    },
+    {
+      "id": 380328,
+      "title": "Chicken Rancher",
+      "image": "https://images.spoonacular.com/file/wximages/380328-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Fox's Pizza Den",
+      "servings": {
+        "number": 1,
+        "size": 114,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 305413,
+      "title": "Chicken Critters",
+      "image": "https://images.spoonacular.com/file/wximages/305413-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Texas Roadhouse",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 424195,
+      "title": "Chicken Bellagio",
+      "image": "https://images.spoonacular.com/file/wximages/424195-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "The Cheesefacke Factory",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 418835,
+      "title": "Chicken Supremes",
+      "image": "https://images.spoonacular.com/file/wximages/418835-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Bojangles",
+      "servings": {
+        "number": 1,
+        "size": 4,
+        "unit": "pc"
+      }
+    },
+    {
+      "id": 423144,
+      "title": "Chicken McNuggets",
+      "image": "https://images.spoonacular.com/file/wximages/423144-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "McDonald's",
+      "servings": {
+        "number": 1,
+        "size": 4,
+        "unit": "piece"
+      }
+    },
+    {
+      "id": 359929,
+      "title": "Monster Energy Drink",
+      "image": "https://spoonacular.com/menuItemImages/plastic-to-go-drink-cup.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Gandolfo's New York Delicatessen",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "can"
+      }
+    },
+    {
+      "id": 384585,
+      "title": "Rejuvenator Juice Blend",
+      "image": "https://images.spoonacular.com/file/wximages/384585-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Juice It Up!",
+      "servings": {
+        "number": 1,
+        "size": 12,
+        "unit": "oz"
+      }
+    },
+    {
+      "id": 244132,
+      "title": "Orange Juice, Twelve",
+      "image": "https://images.spoonacular.com/file/wximages/244132-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Jamba Juice",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 244091,
+      "title": "Carrot Juice, Twelve",
+      "image": "https://images.spoonacular.com/file/wximages/244091-312x231.ashx",
+      "imageType": "ashx",
+      "restaurantChain": "Jamba Juice",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "Size Twelve"
+      }
+    },
+    {
+      "id": 244122,
+      "title": "Orange Berry Antioxidant Juice Blend, Twelve",
+      "image": "https://images.spoonacular.com/file/wximages/244122-312x231.ashx",
+      "imageType": "ashx",
+      "restaurantChain": "Jamba Juice",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 244121,
+      "title": "Orange Berry Antioxidant Juice Blend, Sixteen",
+      "image": "https://images.spoonacular.com/file/wximages/244121-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Jamba Juice",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 377596,
+      "title": "Fried Wings - Starter Size",
+      "image": "https://images.spoonacular.com/file/wximages/377596-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Boston Pizza",
+      "servings": {
+        "number": 1,
+        "size": 241,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 424729,
+      "title": "Fried Chicken Strips Cobb Salad (add dressing)",
+      "image": "https://images.spoonacular.com/file/wximages/424729-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Denny's",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 360823,
+      "title": "Chang's Fried Rice - Shrimp",
+      "image": "https://images.spoonacular.com/file/wximages/360823-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "PF Chang's",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "serving"
+      }
+    },
+    {
+      "id": 353148,
+      "title": "Fried Ravioli",
+      "image": "https://images.spoonacular.com/file/wximages/353148-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Eat n Park",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 287230,
+      "title": "Fried Rice \"Tasty Thai\" w/ Prawns, Baby Corn, Asparagos",
+      "image": "https://images.spoonacular.com/file/wximages/287230-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Tasty Thai",
+      "servings": {
+        "number": 1,
+        "size": 400,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 377597,
+      "title": "Fried Wings - Double Order",
+      "image": "https://images.spoonacular.com/file/wximages/377597-312x231.png",
+      "imageType": "png",
+      "restaurantChain": "Boston Pizza",
+      "servings": {
+        "number": 1,
+        "size": 483,
+        "unit": "g"
+      }
+    },
+    {
+      "id": 254126,
+      "title": "Shrimp Fried Rice, Gluten Free",
+      "image": "https://images.spoonacular.com/file/wximages/254126-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "PF Chang's",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 360748,
+      "title": "GF Chang's Fried Rice - Shrimp",
+      "image": "https://images.spoonacular.com/file/wximages/360748-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "PF Chang's",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "serving"
+      }
+    },
+    {
+      "id": 423947,
+      "title": "Fried Macaroni and Cheese",
+      "image": "https://images.spoonacular.com/file/wximages/423947-312x231.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "The Cheesefacke Factory",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    }
+  ]
+}
