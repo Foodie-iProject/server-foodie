@@ -6,6 +6,7 @@ const {
   Restaurant,
   Food,
   OrderDetailFoods,
+  FoodCart,
   Sequelize,
 } = require("../models");
 const midtransClient = require("midtrans-client");
@@ -58,6 +59,7 @@ class CustomerController {
   static async midtransToken(req, res, next) {
     try {
       const { totalPrice } = req.body;
+      console.log(totalPrice,"<<<<<<<")
       const codeOrder =
         `Foodie-${req.customer.id}-Transsaction` +
         Math.ceil(Math.random() * 10000) +
@@ -92,11 +94,81 @@ class CustomerController {
     }
   }
 
+  static async addToCart(req, res, next) {
+    try {
+      const CustomerId = req.customer.id;
+      const FoodId = req.params.id;
+
+      const newFoodCart = await FoodCart.create({
+        CustomerId,
+        FoodId,
+      });
+      console.log(newFoodCart);
+      if (!newFoodCart) throw { name: "Not_Found" };
+      res.status(200).json(newFoodCart);
+    } catch (error) {
+      // console.log(error.name,"<<<<<<<<<<<<<<")
+      next(error);
+    }
+  }
+
+  static async removeItemFromCart(req, res, next) {
+    try {
+      // const CustomerId = req.customer.id;
+      const foodCartId = req.params.id;
+
+      const deletedFood = await FoodCart.destroy({
+        where: {
+          id:foodCartId
+        },
+        returning: true,
+      });
+      if (!deletedFood) throw { name: "Not_Found" };
+      res.status(201).json({ message: "Item has been removed successfully", deletedFood });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getFoodinMyCart(req, res, next) {
+    try {
+      const CustomerId = req.customer.id;
+      // console.log(CustomerId);
+      const foodList = await FoodCart.findAll({
+        where: {
+          CustomerId,
+        },
+        include: [
+          {
+            model: Food,
+            include: [
+              {
+                model: Restaurant,
+                attributes: {
+                  exclude: ["password", "createdAt", "updatedAt"],
+                },
+              },
+            ],
+            attributes: {
+              exclude: ["createdAt", "updatedAt"],
+            },
+          },
+        ],
+      });
+      if (!foodList) {
+        throw { name: "Not_Found" };
+      }
+      res.status(200).json(foodList);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async createOrder(req, res, next) {
     try {
       const status = "find_a_driver";
       const CustomerId = req.customer.id;
-      const { totalPrice, qty, FoodId } = req.body;
+      const { totalPrice, qty} = req.body;
       const newOrder = await Order.create({
         // DriverId,
         CustomerId,
@@ -107,7 +179,6 @@ class CustomerController {
         qty,
         status,
         totalPrice,
-        FoodId,
         OrderId: newOrder.id,
       });
       res.status(200).json(newOrderDetail);
@@ -228,6 +299,46 @@ class CustomerController {
       );
 
       res.status(200).json(updatedOrder[1]);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async readAllFood(req, res, next) {
+    try {
+      let { page, search } = req.query;
+      const queryOptions = {
+        include: [
+          {
+            model: Restaurant,
+            attributes: {
+              exclude: ["password", "createdAt", "updatedAt"],
+            },
+          },
+        ],
+        limit: 12,
+      };
+      if (search === undefined) {
+        search = "";
+      }
+      if (search !== undefined) {
+        queryOptions.where = {
+          ...queryOptions.where,
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+      if (page !== undefined) {
+        const offset = +page > 1 ? +page - 1 : 0;
+        queryOptions.offset = offset * queryOptions.limit;
+      }
+      if (page === "") {
+        page = 1;
+      }
+      const allFood = await Food.findAndCountAll(queryOptions);
+      let maxPage = Math.ceil(allFood.count / 12);
+      res.status(200).json({ currentPage: page, maxPage, Food: allFood });
     } catch (error) {
       next(error);
     }

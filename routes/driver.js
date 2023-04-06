@@ -1,21 +1,21 @@
 const express = require("express");
-const Controller = require("../controllers/driverController");
+const DriverController = require("../controllers/driverController");
 const { authDriver } = require("../middlewares/authentication");
 const { authDriverToChangeStatus } = require("../middlewares/authorization");
 const router = express.Router();
 
-router.post("/register", Controller.register);
-router.post("/login", Controller.login);
+router.post("/register", DriverController.register);
+router.post("/login", DriverController.login);
 router.use(authDriver);
-router.get("/orders", Controller.getAllAvailableOrder);
+router.get("/orders", DriverController.getAllAvailableOrder);
 router.get(
     "/orders/:OrderId",
-    Controller.readOrderById
+    DriverController.readOrderById
   );
 router.patch(
   "/orders/:OrderId",
   authDriverToChangeStatus,
-  Controller.takeOrder
+  DriverController.takeOrder
 );
 
 module.exports = router;
